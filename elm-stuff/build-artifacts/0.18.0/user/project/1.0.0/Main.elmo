@@ -1,15 +1,90 @@
+var _user$project$Main$model = {
+	board: A2(_elm_lang$core$Array$repeat, 9, ''),
+	turn: 'X'
+};
+var _user$project$Main$turns = _elm_lang$core$Dict$fromList(
+	{
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'O', _1: 'X'},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'X', _1: 'O'},
+			_1: {ctor: '[]'}
+		}
+	});
+var _user$project$Main$updateTurn = function (current) {
+	return A2(
+		_elm_lang$core$Maybe$withDefault,
+		'',
+		A2(_elm_lang$core$Dict$get, current, _user$project$Main$turns));
+};
 var _user$project$Main$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{
-				turn: _elm_lang$core$Basics$toString(_p0._0)
-			});
+		var _p1 = _p0._0;
+		return _elm_lang$core$Native_Utils.eq(
+			A2(
+				_elm_lang$core$Maybe$withDefault,
+				'',
+				A2(_elm_lang$core$Array$get, _p1, model.board)),
+			'') ? {
+			turn: _user$project$Main$updateTurn(model.turn),
+			board: A3(_elm_lang$core$Array$set, _p1, model.turn, model.board)
+		} : model;
 	});
-var _user$project$Main$model = {
-	board: A2(_elm_lang$core$Array$repeat, 9, 'O'),
-	turn: 'X'
+var _user$project$Main$gridStyle = {
+	ctor: '::',
+	_0: {ctor: '_Tuple2', _0: 'display', _1: 'grid'},
+	_1: {
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'align-items', _1: 'stretch'},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'grid-template-columns', _1: '15vw 15vw 15vw'},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'grid-template-rows', _1: '15vw 15vw 15vw'},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'grid-gap', _1: '0.5vw'},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'background-color', _1: '#fff'},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'color', _1: '#444'},
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		}
+	}
+};
+var _user$project$Main$cellStyle = {
+	ctor: '::',
+	_0: {ctor: '_Tuple2', _0: 'user-select', _1: 'none'},
+	_1: {
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'justify-content', _1: 'center'},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'display', _1: 'flex'},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'align-items', _1: 'center'},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'background-color', _1: 'lightgrey'},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'font-size', _1: '8vw'},
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
+	}
 };
 var _user$project$Main$Model = F2(
 	function (a, b) {
@@ -33,7 +108,11 @@ var _user$project$Main$cellToDiv = F2(
 						ctor: '::',
 						_0: _elm_lang$html$Html_Events$onClick(
 							_user$project$Main$Take(index)),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$cellStyle),
+							_1: {ctor: '[]'}
+						}
 					}
 				}
 			},
@@ -54,7 +133,11 @@ var _user$project$Main$view = function (model) {
 				{
 					ctor: '::',
 					_0: _elm_lang$html$Html_Attributes$id('board'),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(_user$project$Main$gridStyle),
+						_1: {ctor: '[]'}
+					}
 				},
 				_elm_lang$core$Array$toList(
 					A2(_elm_lang$core$Array$indexedMap, _user$project$Main$cellToDiv, model.board))),
