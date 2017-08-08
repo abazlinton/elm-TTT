@@ -1,0 +1,21 @@
+var _user$project$Repl$t_s_o_l = {ctor: '_Tuple0'};
+var _user$project$Repl$d_e_l_t_r_o_n_3_0_3_0 = A2(
+	_elm_lang$core$Array$indexedMap,
+	F2(
+		function (id, y) {
+			return {id: id, value: y};
+		}),
+	_elm_lang$core$Array$fromList(
+		{
+			ctor: '::',
+			_0: 5,
+			_1: {
+				ctor: '::',
+				_0: 5,
+				_1: {
+					ctor: '::',
+					_0: 5,
+					_1: {ctor: '[]'}
+				}
+			}
+		}));
