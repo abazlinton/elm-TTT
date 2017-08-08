@@ -1,9 +1,22 @@
 var _user$project$Main$update = F2(
 	function (msg, model) {
-		return model;
+		var _p0 = msg;
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				turn: _elm_lang$core$Basics$toString(_p0._0)
+			});
 	});
 var _user$project$Main$model = {
-	board: A2(_elm_lang$core$Array$repeat, 9, '')
+	board: A2(_elm_lang$core$Array$repeat, 9, 'O'),
+	turn: 'X'
+};
+var _user$project$Main$Model = F2(
+	function (a, b) {
+		return {board: a, turn: b};
+	});
+var _user$project$Main$Take = function (a) {
+	return {ctor: 'Take', _0: a};
 };
 var _user$project$Main$cellToDiv = F2(
 	function (index, cell) {
@@ -13,7 +26,16 @@ var _user$project$Main$cellToDiv = F2(
 				ctor: '::',
 				_0: _elm_lang$html$Html_Attributes$id(
 					_elm_lang$core$Basics$toString(index)),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('cell'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(
+							_user$project$Main$Take(index)),
+						_1: {ctor: '[]'}
+					}
+				}
 			},
 			{
 				ctor: '::',
@@ -22,22 +44,34 @@ var _user$project$Main$cellToDiv = F2(
 			});
 	});
 var _user$project$Main$view = function (model) {
-	return A3(
-		_elm_lang$html$Html$node,
-		'div',
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$id('board'),
-			_1: {ctor: '[]'}
-		},
-		_elm_lang$core$Array$toList(
-			A2(_elm_lang$core$Array$indexedMap, _user$project$Main$cellToDiv, model.board)));
+			_0: A3(
+				_elm_lang$html$Html$node,
+				'div',
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$id('board'),
+					_1: {ctor: '[]'}
+				},
+				_elm_lang$core$Array$toList(
+					A2(_elm_lang$core$Array$indexedMap, _user$project$Main$cellToDiv, model.board))),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(model.turn),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
 };
 var _user$project$Main$main = _elm_lang$html$Html$beginnerProgram(
 	{model: _user$project$Main$model, view: _user$project$Main$view, update: _user$project$Main$update})();
-var _user$project$Main$Model = function (a) {
-	return {board: a};
-};
-var _user$project$Main$Dummy = function (a) {
-	return {ctor: 'Dummy', _0: a};
-};
